@@ -56,4 +56,20 @@ public class RecipeList {
             System.out.println(e);
         }
     }
-}
+
+    public static ArrayList<Recipe> getAllRecipes() {
+        return allRecipes;
+    }
+
+    public static void setAllRecipes(ArrayList<Recipe> allRecipes) {
+        RecipeList.allRecipes = allRecipes;
+    }
+
+    public static ArrayList<String> getRecipeName (){
+        ArrayList<String> allRecipeName = new ArrayList<String>();
+        for(int i = 0; i < allRecipes.size(); i++) {
+            allRecipeName.add(allRecipes.get(i).getName());
+        }
+        return allRecipeName;
+        }
+    }

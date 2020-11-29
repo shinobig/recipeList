@@ -10,33 +10,48 @@ public class Gui {
 
     public JFrame frame = new JFrame("Recipes tests");
     ArrayList<JButton> recipeButtons = new ArrayList<JButton>();
-   // private JButton testButton = new JButton();
+    RecipeList recipeList;
 
-    Gui (){
+    JPanel buttonPanel = new JPanel();
+    JPanel recipePanel = new JPanel();
+    // private JButton testButton = new JButton();
+
+    Gui (RecipeList recipeList){
         int height = 700;
+        this.recipeList = recipeList;
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.setSize(600, height);
         frame.getContentPane().setBackground(new Color(215,204,200));
         frame.setLayout(null);
 
-        JPanel buttonPanel = new JPanel();
-        JPanel recipePanel = new JPanel();
-
-        RecipeButton testButton = new RecipeButton("holis");
-        RecipeButton testButton2 = new RecipeButton("borolis");
+        // RecipeButton testButton = new RecipeButton("holis");
+        //  RecipeButton testButton2 = new RecipeButton("borolis");
+        // testButton2.getRecipeButton().setBounds(500,550,55,42);
 
         buttonPanel.setBounds(0,0, 200,height);
         buttonPanel.setBackground(new Color(139,195,74));
+        buttonPanel.setLayout(null);
         recipePanel.setBounds(200, 0, 400, height);
         recipePanel.setBackground(new Color(215,204,200));
 
         frame.add(buttonPanel);
         frame.add(recipePanel);
 
-        buttonPanel.add(testButton.getRecipeButton());
-        buttonPanel.add(testButton2.getRecipeButton());
+        //  buttonPanel.add(testButton.getRecipeButton());
+        // frame.add(testButton2.getRecipeButton());
+
+        getAllButtons(recipeList.getRecipeName());
+
         frame.setVisible(true);
+    }
+
+    public void getAllButtons(ArrayList<String> allButtons){
+        for(int i = 0; i < allButtons.size(); i++){
+            RecipeButton recipeButtonToAdd = new RecipeButton(allButtons.get(i));
+            recipeButtonToAdd.getRecipeButton().setBounds(25, ((i+1)*50), 150, 30);
+            buttonPanel.add(recipeButtonToAdd.getRecipeButton());
+        }
     }
 
     private class RecipeButton implements ActionListener {
@@ -46,6 +61,7 @@ public class Gui {
 
         RecipeButton(String recipeName){
             this.recipeName = recipeName;
+            recipeButton.setText(recipeName);
             recipeButton.addActionListener(this);
         }
 

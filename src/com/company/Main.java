@@ -12,7 +12,9 @@ public class Main {
 
 
 
-        Gui gui = new Gui();
+        Gui gui = new Gui(recipeList);
+
+     //   gui.getAllButtons(recipeList.getRecipeName());
 
     }
 }

@@ -66,7 +66,6 @@ public class Recipe {
     public void addIngredients (String quantity, String ingredientName, String type){
         Ingredient ingredientToAdd = new Ingredient(quantity, ingredientName, type);
         ingredients.add(ingredientToAdd);
-
     }
 
     private static class Ingredient {
