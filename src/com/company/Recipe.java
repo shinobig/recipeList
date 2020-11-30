@@ -57,11 +57,11 @@ public class Recipe {
         this.imageUrl = imageUrl;
     }
 
-    public void showAllIngredients(){
-        for (Ingredient ingredient : this.ingredients){
-            System.out.println(ingredient.getIngredientName());
-        }
-    }
+public String getIngredientName(int index){
+        return ingredients.get(index).getIngredientName();
+}
+
+
 
     public void addIngredients (String quantity, String ingredientName, String type){
         Ingredient ingredientToAdd = new Ingredient(quantity, ingredientName, type);

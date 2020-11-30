@@ -14,11 +14,18 @@ public class Gui {
 
     JPanel buttonPanel = new JPanel();
     JPanel recipePanel = new JPanel();
-    // private JButton testButton = new JButton();
+    JLabel recipeTitle = new JLabel();
+    Recipe displayedRecipe;
+
 
     Gui (RecipeList recipeList){
         int height = 700;
+        this.displayedRecipe = recipeList.getAllRecipes().get(0);
         this.recipeList = recipeList;
+
+
+
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.setSize(600, height);
@@ -34,17 +41,34 @@ public class Gui {
         buttonPanel.setLayout(null);
         recipePanel.setBounds(200, 0, 400, height);
         recipePanel.setBackground(new Color(215,204,200));
+        recipePanel.setLayout(null);
 
         frame.add(buttonPanel);
         frame.add(recipePanel);
 
-        //  buttonPanel.add(testButton.getRecipeButton());
-        // frame.add(testButton2.getRecipeButton());
-
         getAllButtons(recipeList.getRecipeName());
 
+        // Show labels
+        setAllLabels();
+
+
+
+        // Show gui
         frame.setVisible(true);
     }
+
+    public void setAllLabels(){
+this.recipeTitle.setText(this.displayedRecipe.getName());
+this.recipeTitle.setHorizontalAlignment(JLabel.CENTER);
+        this.recipeTitle.setVerticalAlignment(JLabel.TOP);
+this.recipeTitle.setFont(new Font("Helvetica", Font.BOLD, 20));
+recipePanel.add(this.recipeTitle);
+        getAllIngredients(displayedRecipe);
+
+
+    }
+
+    // Methods here
 
     public void getAllButtons(ArrayList<String> allButtons){
         for(int i = 0; i < allButtons.size(); i++){
@@ -54,37 +78,11 @@ public class Gui {
         }
     }
 
-    private class RecipeButton implements ActionListener {
+    private void getAllIngredients(Recipe recipeToCheck){
+        for (int i = 0; i < recipeToCheck.getIngredients().size(); i++){
+         recipePanel.setBounds(110,50, 50, 50);
+            recipePanel.add(new IngredientsLabel(recipeToCheck.getIngredientName(i)).getIngredient());
 
-        JButton recipeButton = new JButton();
-        String recipeName;
-
-        RecipeButton(String recipeName){
-            this.recipeName = recipeName;
-            recipeButton.setText(recipeName);
-            recipeButton.addActionListener(this);
-        }
-
-        public JButton getRecipeButton() {
-            return recipeButton;
-        }
-
-        public void setRecipeButton(JButton recipeButton) {
-            this.recipeButton = recipeButton;
-        }
-
-        public String getRecipeName() {
-            return recipeName;
-        }
-
-        public void setRecipeName(String recipeName) {
-            this.recipeName = recipeName;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println(getRecipeName());
         }
     }
-
 }
